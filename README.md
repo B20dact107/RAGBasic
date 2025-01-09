@@ -1,6 +1,6 @@
-# Retrieval-Augmented Generation (RAG) with Qdrant and OpenAI
+# Retrieval-Augmented Generation (RAG) with Qdrant and Gemini
 
-This project demonstrates how to perform Retrieval-Augmented Generation (RAG) using Qdrant for vector storage and OpenAI for language generation. The setup involves loading documents, generating embeddings, storing them in Qdrant, and querying them to generate responses using OpenAI.
+This project demonstrates how to perform Retrieval-Augmented Generation (RAG) using Qdrant for vector storage and Gemini for language generation. The setup involves loading documents, generating embeddings, storing them in Qdrant, and querying them to generate responses using Gemini.
 
 ## Table of Contents
 
@@ -16,8 +16,8 @@ This project demonstrates how to perform Retrieval-Augmented Generation (RAG) us
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/yourusername/rag-with-qdrant.git
-    cd rag-with-qdrant
+    git clone https://github.com/B20dact107/RAGBasic.git
+    cd RAGBasic
     ```
 
 2. **Create a virtual environment** (optional but recommended):
@@ -35,35 +35,35 @@ This project demonstrates how to perform Retrieval-Augmented Generation (RAG) us
 
 ## Setup
 
-1. **Ensure you have a running instance of Qdrant**. You can use Docker to run Qdrant:
 
-    ```bash
-    docker compose up -d
-    ```
-
-2. **Create a `.env` file** in the project directory and add your OpenAI API key:
+1. **Create a `.env` file** in the project directory and add your OpenAI API key:
 
     ```env
-    OPENAI_KEY=your-openai-api-key
+    GEMINI_KEY=your-geminigemini-api-key
     ```
 
 ## Ingesting Documents
 
-Use the `ingest.py` script to load and process documents, generate embeddings, and store them in Qdrant.
+Use the `embeddingsdata.py` script to load and process documents, generate embeddings, and store them in Qdrant.
 
 ```bash
-python ingest.py
+python embeddingsdata.py
 ```
 
 ## Running the RAG Script
-Use the `rag.py` script to query the vector database and generate responses using OpenAI.
+Use the `chatbot.py` script to query the vector database and generate responses using GeminiGemini.
 ```bash
-python rag.py
+python chatbot.py
+```
+## Input question and LLM is gemini
+```bash
+Enter your question (or 'quit' to exit): What is RAG?
+Chose LLM(gemini): geminigemini
 ```
 
 ## Configuration
 - Qdrant: Ensure Qdrant is running on http://localhost:6333.
-- OpenAI API Key: Store your OpenAI API key in a .env file in the project directory.
+- GEMINI API Key: Store your GEMINI API key in a .env file in the project directory.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
