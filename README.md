@@ -58,7 +58,7 @@ python chatbot.py
 ## Input question and LLM is gemini
 ```bash
 Enter your question (or 'quit' to exit): What is RAG?
-Chose LLM(gemini): geminigemini
+Chose LLM(gemini): gemini
 ```
 
 ## Configuration
