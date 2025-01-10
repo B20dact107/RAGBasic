@@ -16,22 +16,22 @@ for filename in os.listdir(data_folder):
     if filename.endswith(".pdf"):
         pdf_path = os.path.join(data_folder, filename)
         loader = PyPDFLoader(pdf_path)
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=50)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size = 512, chunk_overlap = 50)
         documents.extend(loader.load_and_split(text_splitter))
 
 print(f"Number of documents: {len(documents)}")
 
-client = QdrantClient("localhost", port=6333, timeout=1200)
+client = QdrantClient("localhost", port = 6333, timeout = 1200)
 
 if not client.collection_exists("document_collection"):
     client.create_collection(
-        collection_name="document_collection",
-          vectors_config={
-        "content": VectorParams(size=384, distance=Distance.COSINE),
+        collection_name = "document_collection",
+          vectors_config = {
+        "content": VectorParams(size = 384, distance = Distance.COSINE),
     },
     )
 
-def chunked_metadata(data, client=client, collection_name="document_collection", batch_size=100):
+def chunked_metadata(data, client = client, collection_name = "document_collection", batch_size = 100):
     chunked_metadata = []
     for item in data:
         id = str(uuid4())
@@ -49,23 +49,25 @@ def chunked_metadata(data, client=client, collection_name="document_collection",
         }
 
         metadata = PointStruct(
-            id=id,
-            vector={"content": content_vector},
-            payload=payload,
+            id = id,
+            vector = {"content": content_vector},
+            payload = payload,
         )
         chunked_metadata.append(metadata)
 
         if len(chunked_metadata) >= batch_size:
             client.upsert(
-                collection_name=collection_name,
-                points=chunked_metadata,
+                collection_name = collection_name,
+                wait = True,
+                points = chunked_metadata,
             )
             chunked_metadata = []
 
     if chunked_metadata:
         client.upsert(
-            collection_name=collection_name,
-            points=chunked_metadata,
+            collection_name = collection_name,
+            wait = True,
+            points = chunked_metadata,
         )
 
 chunked_metadata(documents)

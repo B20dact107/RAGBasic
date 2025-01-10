@@ -16,18 +16,12 @@ This project demonstrates how to perform Retrieval-Augmented Generation (RAG) us
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/B20dact107/RAGBasic.git
-    cd RAGBasic
+    git clone https://github.com/B20dact107/RAGBasic-with-LLM-Gemini-and-Storage-Qdrant.git
+    cd RAGBasic-with-LLM-Gemini-and-Storage-Qdrant
     ```
 
-2. **Create a virtual environment** (optional but recommended):
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
-
-3. **Install the dependencies**:
+2. **Install the dependencies**:
 
     ```bash
     pip install -r requirements.txt
@@ -35,8 +29,14 @@ This project demonstrates how to perform Retrieval-Augmented Generation (RAG) us
 
 ## Setup
 
+### Start Qdrant with Docker 
+To run Qdrant locally, ensure Docker is installed and execute the following command:
 
-1. **Create a `.env` file** in the project directory and add your OpenAI API key:
+```bash
+docker run -d --name qdrant -p 6333:6333 -v $(pwd)/data:/qdrant/storage qdrant/qdrant
+```
+
+**Create a `.env` file** in the project directory and add your OpenAI API key:
 
     ```env
     GEMINI_KEY=your-geminigemini-api-key
